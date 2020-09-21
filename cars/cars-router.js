@@ -14,15 +14,33 @@ router.get('/', (req, res) => {
     });
 });
 
+
+// router.get('/:id', async (req, res) => {
+//   const { id } = req.params;
+
+//   try {
+//       const cars = await db.select('*').from('cars').where({ id }).first();
+//       if (cars) {
+//           res.status(200).json(cars);
+//       } else {
+//           res.status(400).json({ message: "Car not found" });
+//       }
+//   } catch (err) {
+//       console.log(err);
+//       res.status(500).json({ message: "sorry, ran into an error" });
+//   }
+// });
+
+
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
   db('cars').where({ id }).first()
-    .then(car => {
-      res.json(car);
+    .then(cars => {
+      res.json(cars);
     })
     .catch(err => {
-      res.status(500).json({ message: 'Failed to retrieve car' });
+      res.status(500).json({ message: 'Failed to retrieve car info' });
     });
 });
 
